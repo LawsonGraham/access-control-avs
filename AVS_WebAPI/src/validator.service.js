@@ -15,10 +15,6 @@ async function validate(proofOfTask, data) {
       }
       
       var option = whitelistOptions[0];
-      console.log('chainID:', option.chainId, taskResult.chainId, option.chainId === taskResult.chainId);
-        console.log('contractAddress:', option.contractAddress.toLowerCase(), taskResult.contractAddress.toLowerCase(), option.contractAddress.toLowerCase() === taskResult.contractAddress.toLowerCase());
-        console.log('method:', option.method, taskResult.method, option.method === taskResult.method);
-        console.log('params:', option.params, taskResult.params, arraysEqual(option.params,taskResult.params));
 
       const validationMethod = whitelistOptions.find(option => option.chainId === taskResult.chainId && option.contractAddress.toLowerCase() === taskResult.contractAddress.toLowerCase() && option.method === taskResult.method && arraysEqual(option.params, taskResult.params));
       console.log('Validation Method:', validationMethod);

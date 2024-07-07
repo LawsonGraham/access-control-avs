@@ -9,8 +9,8 @@ async function getValue(chainID, contractAddress, contractABI, method, params, u
         if (params.some(param => param === "<UA>")) {
             params[params.indexOf("<UA>")] = userAddress;
         }
-        console.log('contract:', contract);
-        const result = await contract[method](...params);
+        // const result = await contract[method](...params);
+        const result = await contract.balanceOf(...params);
         console.log('Function Result:', Number(result));
         return Number(result);
 

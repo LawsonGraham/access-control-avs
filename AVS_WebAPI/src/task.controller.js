@@ -15,15 +15,11 @@ router.post("/validate", async (req, res) => {
         console.log(data)
         const decodedData = ethers.AbiCoder.defaultAbiCoder().decode(['address'], data)
 
-        console.log("ABI DECODED ADAT", decodedData);
-        // console.log(`Validate task: proof of task: ${proofOfTask}, data: ${decodedData}`);
-
-
 
         const result = await validatorService.validate(proofOfTask, decodedData);
         console.log('Vote:', result ? 'Approve' : 'Not Approved');
         console.log("DATA FIELD", data)
-        return res.status(200).send(new CustomResponse(true));
+        return res.status(200).send(new CustomResponse(result));
     } catch (error) {
         console.log(error)
         return res.status(500).send(new CustomError("Something went wrong", {}));

@@ -22,7 +22,6 @@ async function getValue(chainID, contractAddress, contractABI, method, params, u
 
     } catch (err) {
       console.error(err)
-      console.log(err)
     }
   }
 

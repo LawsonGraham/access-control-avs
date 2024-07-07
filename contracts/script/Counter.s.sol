@@ -23,8 +23,7 @@ contract CounterScript is Script {
     }
 
     function setWhitelistMethod() public {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
 
         counter = Counter(counterAddress);
 
@@ -37,7 +36,7 @@ contract CounterScript is Script {
 
         IWhitelistAvs.WhitelistMethod memory method = IWhitelistAvs.WhitelistMethod({
             chainId: "sepolia",
-            contractAddress: 0x53844F9577C2334e541Aec7Df7174ECe5dF1fCf0,
+            contractAddress: 0xaCB4CBd72244753cE534e333EE07C0214cD0E54D,
             method: "balanceOf",
             params: params,
             requirement: requirement
@@ -76,7 +75,7 @@ contract CounterScript is Script {
 
         counter = Counter(counterAddress);
 
-        address addressToCheck = 0x8b35465EC613E50B3629Cb38fED26bEC7765da32;
+        address addressToCheck = 0xF69dD439bea9bA48b15AB73Cb504949A5A56Aa9d;
         
         bool whitelisted = counter.whitelist(addressToCheck);
         console.log("Whitelist retrieved");
