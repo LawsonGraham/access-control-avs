@@ -31,9 +31,10 @@ router.post("/execute", async (req, res) => {
         const proofOfTask = {
             chainId: chainId,
             contractAddress: contractAddress,
+            contractABI: contractABI,
             method: method,
             params: params,
-            userAddress: userAddress,
+            userAddress: userAddress.toLowerCase(),
             requirement: requirement,
             value: result
         }

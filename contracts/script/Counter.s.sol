@@ -10,7 +10,7 @@ contract CounterScript is Script {
 
     address public owner = 0x8b35465EC613E50B3629Cb38fED26bEC7765da32;
 
-    address public counterAddress = 0xD1EC850713949B6684C0b5873FF0479E3a3F0D74;
+    address public counterAddress = 0x5a956FB687Fb660550A75260078be19a5B463EB9;
 
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
@@ -54,8 +54,17 @@ contract CounterScript is Script {
         counter = Counter(counterAddress);
         
         IWhitelistAvs.WhitelistMethod[] memory method = counter.getWhitelistMethods();
-        // console.log(method[0].contractAddress);
         console.log("Whitelist methods retrieved");
+        for (uint256 i = 0; i < method.length; i++) {
+            console.log(method[i].chainId);
+            console.log(method[i].contractAddress);
+            console.log(method[i].method);
+            console.log(method[i].params[0]);
+
+            console.log(method[i].requirement.length);
+            console.log(method[i].requirement[0]);
+            console.log(method[i].requirement[1]);
+        }
         console.log(method.length);
         vm.stopBroadcast();
     }

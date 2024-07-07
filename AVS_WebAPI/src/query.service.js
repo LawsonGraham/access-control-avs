@@ -1,18 +1,23 @@
 require('dotenv').config();
 const ethers = require("ethers");
 
-const protocolContractAddress = "0xD1EC850713949B6684C0b5873FF0479E3a3F0D74";
+const protocolContractAddress = "0x5a956FB687Fb660550A75260078be19a5B463EB9";
 const protocolContractABI = require("./utils/protocolContractABI.json").abi;
 
 async function getValue(chainID, contractAddress, contractABI, method, params, userAddress) {
+    console.log('chainID:', chainID);
+    console.log('contractAddress:', contractAddress);
+    console.log('contractABI:', contractABI);
+    console.log('method:', method);
+    console.log('params:', params);
+    console.log('userAddress:', userAddress);
     try {
         const provider = new ethers.getDefaultProvider(chainID);
         const contract = new ethers.Contract(contractAddress, contractABI, provider);
-
         if (params.some(param => param === "<UA>")) {
             params[params.indexOf("<UA>")] = userAddress;
         }
-        console.log('contract:', contract);
+        console.log('params:', params);
         const result = await contract[method](...params);
         console.log('Function Result:', Number(result));
         return Number(result);
@@ -24,15 +29,16 @@ async function getValue(chainID, contractAddress, contractABI, method, params, u
 
 async function getContractWhitelistMethods() {
     try {
-        // TODO: which chain does our protocol live on?
-        const provider = new ethers.getDefaultProvider('mainnet');
+        const provider = new ethers.JsonRpcProvider('https://rpc-amoy.polygon.technology/');
 
         const contract = new ethers.Contract(protocolContractAddress, protocolContractABI, provider);
         // returns [[String: chainId, address: contractAddress, String: method, Array: params, Arry: requirement]]
         const whitelistMethods = await contract.getWhitelistMethods();
         console.log('Function Result:', whitelistMethods);
+        console.log('Function Result Data:', whitelistMethods.data);
+        console.log('Function Result Arr:', whitelistMethods[0]);
 
-        const whitlistObjects = whitelistMethods.data?.map(method => {
+        const whitlistObjects = whitelistMethods.map(method => {
             return {
                 chainId: method[0],
                 contractAddress: method[1],

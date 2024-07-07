@@ -13,6 +13,7 @@ async function getIPfsTask(cid) {
     return {
       chainId: data.chainId,
       contractAddress: data.contractAddress,
+      contractABI: data.contractABI,
       method: data.method,
       params: data.params,
       requirement: data.requirement,
