@@ -36,7 +36,8 @@ router.post("/execute", async (req, res) => {
             params: params,
             userAddress: userAddress.toLowerCase(),
             requirement: requirement,
-            value: result
+            value: result,
+            timestamp: Date.now()
         }
         console.log('Function Result:', result);
         const cid = await dalService.publishJSONToIpfs(proofOfTask);

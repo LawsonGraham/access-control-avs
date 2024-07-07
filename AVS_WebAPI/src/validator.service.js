@@ -29,6 +29,9 @@ async function validate(proofOfTask, data) {
         return false;
       }
       var result = await queryService.getValue(validationMethod.chainId, validationMethod.contractAddress.toLowerCase(), taskResult.contractABI, validationMethod.method, validationMethod.params, taskResult.userAddress);
+      if (result === undefined) {
+        return false;
+      }
       console.log('Result:', result);
       // we have some chain -> rpc config
 
