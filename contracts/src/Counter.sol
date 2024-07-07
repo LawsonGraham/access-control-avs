@@ -1,20 +1,25 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.20;
 
-import {IAvsLogic} from "../../.othentic/contracts/src/NetworkManagement/L2/interfaces/IAvsLogic.sol";
-import {IAttestationCenter} from "../../.othentic/contracts/src/NetworkManagement/L2/interfaces/IAttestationCenter.sol";
+import {IAvsLogic} from "lib/othentic-contracts/src/NetworkManagement/L2/interfaces/IAvsLogic.sol";
+import {IAttestationCenter} from "lib/othentic-contracts/src/NetworkManagement/L2/interfaces/IAttestationCenter.sol";
 import {IWhitelistAvs} from "./interfaces/IWhitelistAvs.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Counter {
+contract Counter is Ownable, IWhitelistAvs {
     uint256 public number;
 
     IWhitelistAvs.WhitelistMethod[] public whitelistMethods;
 
     mapping(address => bool) public whitelist;
 
-    modifier onlyWhitelisted(address userAddress) {
-        require(whitelist[userAddress], "Counter: user is not whitelisted");
+    modifier onlyWhitelisted() {
+        require(whitelist[msg.sender], "Counter: user is not whitelisted");
         _;
+    }
+
+    constructor(address owner, uint256 intialNumber) Ownable(owner) {
+        number = intialNumber;
     }
 
     function afterTaskSubmission(IAttestationCenter.TaskInfo calldata _taskInfo, bool _isApproved, bytes calldata _tpSignature, uint256[2] calldata _taSignature, uint256[] calldata _operatorIds) external {
@@ -33,8 +38,6 @@ contract Counter {
     }
 
     function setWhitelistMethod(WhitelistMethod memory method) public onlyOwner {
-        // TODO: security checks
-        // do nothing
         whitelistMethods.push(method);
     }       
 

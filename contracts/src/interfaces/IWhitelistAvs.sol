@@ -1,21 +1,8 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity >=0.8.20;
 
-/*______     __      __                              __      __ 
- /      \   /  |    /  |                            /  |    /  |
-/$$$$$$  | _$$ |_   $$ |____    ______   _______   _$$ |_   $$/   _______ 
-$$ |  $$ |/ $$   |  $$      \  /      \ /       \ / $$   |  /  | /       |
-$$ |  $$ |$$$$$$/   $$$$$$$  |/$$$$$$  |$$$$$$$  |$$$$$$/   $$ |/$$$$$$$/ 
-$$ |  $$ |  $$ | __ $$ |  $$ |$$    $$ |$$ |  $$ |  $$ | __ $$ |$$ |
-$$ \__$$ |  $$ |/  |$$ |  $$ |$$$$$$$$/ $$ |  $$ |  $$ |/  |$$ |$$ \_____ 
-$$    $$/   $$  $$/ $$ |  $$ |$$       |$$ |  $$ |  $$  $$/ $$ |$$       |
- $$$$$$/     $$$$/  $$/   $$/  $$$$$$$/ $$/   $$/    $$$$/  $$/  $$$$$$$/
-*/
-import { IAttestationCenter } from "./IAttestationCenter.sol";
-/**
- * @author Othentic Labs LTD.
- * @notice Terms of Service: https://www.othentic.xyz/terms-of-service
- */
+import {IAvsLogic} from "lib/othentic-contracts/src/NetworkManagement/L2/interfaces/IAvsLogic.sol";
+
 interface IWhitelistAvs is IAvsLogic {
 
     // returns [[String: chainId, address: contractAddress, String: method, Array: params, Arry: requirement]]
@@ -27,5 +14,5 @@ interface IWhitelistAvs is IAvsLogic {
         string[] requirement;
     }
 
-    function getWhitelistMethods() public view returns (WhitelistMethod[] memory);
+    function getWhitelistMethods() external view returns (WhitelistMethod[] memory);
 }
