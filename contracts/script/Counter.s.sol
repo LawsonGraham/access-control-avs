@@ -69,17 +69,17 @@ contract CounterScript is Script {
         vm.stopBroadcast();
     }
 
-    function setNumber(uint256 newNumber) internal {
+    function readWhitelist() public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
-        counter.setNumber(newNumber);
-        console.log("Counter number set to:", newNumber);
-    }
 
-    function increment() internal {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
-        counter.increment();
-        console.log("Counter incremented");
+        counter = Counter(counterAddress);
+
+        addressToCheck = 0x8b35465EC613E50B3629Cb38fED26bEC7765da32;
+        
+        bool whitelisted = counter.whitelist(0x8b35465EC613E50B3629Cb38fED26bEC7765da32);
+        console.log("Whitelist retrieved");
+        console.log(whitelisted);
+        vm.stopBroadcast();
     }
 }
