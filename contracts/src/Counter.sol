@@ -37,7 +37,7 @@ contract Counter is Ownable, IWhitelistAvs {
         return whitelistMethods;
     }
 
-    function setWhitelistMethod(WhitelistMethod memory method) public onlyOwner {
+    function setWhitelistMethod(IWhitelistAvs.WhitelistMethod memory method) public onlyOwner {
         whitelistMethods.push(method);
     }       
 

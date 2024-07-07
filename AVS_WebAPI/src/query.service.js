@@ -1,8 +1,8 @@
 require('dotenv').config();
 const ethers = require("ethers");
 
-const protocolContractAddress = "";
-const protocolContractABI = "";
+const protocolContractAddress = "0xD1EC850713949B6684C0b5873FF0479E3a3F0D74";
+const protocolContractABI = require("./utils/protocolContractABI.json").abi;
 
 async function getValue(chainID, contractAddress, contractABI, method, params, userAddress) {
     try {
