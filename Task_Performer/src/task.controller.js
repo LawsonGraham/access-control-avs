@@ -18,7 +18,7 @@ router.post("/execute", async (req, res) => {
         var method = req.body.method; // balanceOf
         var params = req.body.params; // ["<UA>"]
         var requirement = req.body.requirement; // ["GT", 100000000]
-        var userAddress = req.body.userAddress; // 0x8b35465EC613E50B3629Cb38fED26bEC7765da32
+        var userAddress = req.body.userAddress.toLowerCase(); // 0x8b35465EC613E50B3629Cb38fED26bEC7765da32
 
         console.log(`taskDefinitionId: ${taskDefinitionId}`);
         console.log(`chainId: ${chainId}`);
@@ -34,7 +34,7 @@ router.post("/execute", async (req, res) => {
             contractABI: contractABI,
             method: method,
             params: params,
-            userAddress: userAddress.toLowerCase(),
+            userAddress: userAddress,
             requirement: requirement,
             value: result,
             timestamp: Date.now()

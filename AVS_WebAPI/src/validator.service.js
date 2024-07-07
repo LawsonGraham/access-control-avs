@@ -8,14 +8,12 @@ async function validate(proofOfTask, data) {
       const taskResult = await dalService.getIPfsTask(proofOfTask);
       console.log(taskResult);
       const whitelistOptions = await queryService.getContractWhitelistMethods();
-      console.log('whitelistOptions:', whitelistOptions);
 
 
       for (var i = 0; i < whitelistOptions.length; i++) {
         whitelistOptions[i].params = whitelistOptions[i].params.map((value) => value === "<UA>" ? taskResult.userAddress.toLowerCase() : value);
       }
       
-      console.log('Whitelist options Params:', whitelistOptions[0].params);
       var option = whitelistOptions[0];
       console.log('chainID:', option.chainId, taskResult.chainId, option.chainId === taskResult.chainId);
         console.log('contractAddress:', option.contractAddress.toLowerCase(), taskResult.contractAddress.toLowerCase(), option.contractAddress.toLowerCase() === taskResult.contractAddress.toLowerCase());
@@ -72,7 +70,7 @@ async function validate(proofOfTask, data) {
       console.log('taskResult.userAddress:', taskResult.userAddress);
       console.log('data:', data);
       // assert that the data field passed on chain is equivalent to the data field used in validation
-      if (taskResult.userAddress.toLowerCase() !== data.toLowerCase()) {
+      if (taskResult.userAddress.toLowerCase() !== data[0].toLowerCase()) {
           return false;
       };
 

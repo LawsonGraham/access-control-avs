@@ -4,6 +4,7 @@ pragma solidity ^0.8.13;
 import {Script, console} from "forge-std/Script.sol";
 import {Counter} from "../src/Counter.sol";
 import {IWhitelistAvs} from "../src/interfaces/IWhitelistAvs.sol";
+import {IAttestationCenter} from "../lib/othentic-contracts/src/NetworkManagement/L2/interfaces/IAttestationCenter.sol";
 
 contract CounterScript is Script {
     Counter public counter;
@@ -82,4 +83,35 @@ contract CounterScript is Script {
         console.log(whitelisted);
         vm.stopBroadcast();
     }
+
+    // function afterTaskSubmit() public {
+    //     uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+    //     vm.startBroadcast(deployerPrivateKey);
+
+    //     counter = Counter(counterAddress);
+
+    //     IAttestationCenter.TaskInfo memory taskInfo = IAttestationCenter.TaskInfo({
+    //         data: abi.encode(address(0x8b35465EC613E50B3629Cb38fED26bEC7765da32)),
+    //         proofOfTask: "",
+    //         taskPerformer: 0x8b35465EC613E50B3629Cb38fED26bEC7765da32,
+    //         taskDefinitionId: 0
+    //     });
+        
+    //     bool isApproved = true;
+
+    //     bytes memory tpSignature = abi.encodePacked("tpSignature");
+
+    //     uint256[2] memory taSignature = [uint256(1), uint256(2)];
+
+    //     taSignature[0] = 1;
+    //     taSignature[1] = 2;
+
+    //     uint256[] memory operatorIds = new uint256[](1);
+
+    //     counter.afterTaskSubmission(taskInfo, isApproved, tpSignature, taSignature, operatorIds);
+
+    //     vm.stopBroadcast();
+    // }
 }
+
+//hex"307838623335343635454336313345353042333632394362333866454432366245433737363564613332"

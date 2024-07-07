@@ -4,7 +4,7 @@ pragma solidity >=0.8.20;
 import {IAvsLogic} from "lib/othentic-contracts/src/NetworkManagement/L2/interfaces/IAvsLogic.sol";
 import {IAttestationCenter} from "lib/othentic-contracts/src/NetworkManagement/L2/interfaces/IAttestationCenter.sol";
 import {IWhitelistAvs} from "./interfaces/IWhitelistAvs.sol";
-import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {Ownable} from "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract Counter is Ownable, IWhitelistAvs {
     uint256 public number;
@@ -12,6 +12,10 @@ contract Counter is Ownable, IWhitelistAvs {
     IWhitelistAvs.WhitelistMethod[] public whitelistMethods;
 
     mapping(address => bool) public whitelist;
+
+    mapping(address => uint256) public balance1;
+
+    mapping(address => uint256) public balance2;
 
     modifier onlyWhitelisted() {
         require(whitelist[msg.sender], "Counter: user is not whitelisted");
@@ -39,13 +43,29 @@ contract Counter is Ownable, IWhitelistAvs {
 
     function setWhitelistMethod(IWhitelistAvs.WhitelistMethod memory method) public onlyOwner {
         whitelistMethods.push(method);
-    }       
-
-    function setNumber(uint256 newNumber) public onlyWhitelisted {
-        number = newNumber;
     }
 
-    function increment() public onlyWhitelisted {
-        number++;
+    function swap(address user, uint256 amountIn, bool bal1_in) public onlyWhitelisted {
+        if (bal1_in) {
+            require(balance1[user] >= amountIn, "Swap: insufficient balance");
+            balance1[user] -= amountIn;
+            balance2[user] += amountIn;
+        } else {
+            require(balance2[user] >= amountIn, "Swap: insufficient balance");
+            balance2[user] -= amountIn;
+            balance1[user] += amountIn;
+        }
+    }
+
+    function swapWithFee(address user, uint256 amountIn, bool bal1_in) public {
+        if (bal1_in) {
+            require(balance1[user] >= amountIn, "Swap: insufficient balance");
+            balance1[user] -= amountIn;
+            balance2[user] += amountIn * 95 / 100;
+        } else {
+            require(balance2[user] >= amountIn, "Swap: insufficient balance");
+            balance2[user] -= amountIn;
+            balance1[user] += amountIn * 95 / 100;
+        }
     }
 }

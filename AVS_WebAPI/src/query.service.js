@@ -7,7 +7,6 @@ const protocolContractABI = require("./utils/protocolContractABI.json").abi;
 async function getValue(chainID, contractAddress, contractABI, method, params, userAddress) {
     console.log('chainID:', chainID);
     console.log('contractAddress:', contractAddress);
-    console.log('contractABI:', contractABI);
     console.log('method:', method);
     console.log('params:', params);
     console.log('userAddress:', userAddress);
@@ -17,13 +16,13 @@ async function getValue(chainID, contractAddress, contractABI, method, params, u
         if (params.some(param => param === "<UA>")) {
             params[params.indexOf("<UA>")] = userAddress;
         }
-        console.log('params:', params);
         const result = await contract[method](...params);
         console.log('Function Result:', Number(result));
         return Number(result);
 
     } catch (err) {
       console.error(err)
+      console.log(err)
     }
   }
 
@@ -34,9 +33,6 @@ async function getContractWhitelistMethods() {
         const contract = new ethers.Contract(protocolContractAddress, protocolContractABI, provider);
         // returns [[String: chainId, address: contractAddress, String: method, Array: params, Arry: requirement]]
         const whitelistMethods = await contract.getWhitelistMethods();
-        console.log('Function Result:', whitelistMethods);
-        console.log('Function Result Data:', whitelistMethods.data);
-        console.log('Function Result Arr:', whitelistMethods[0]);
 
         const whitlistObjects = whitelistMethods.map(method => {
             return {
