@@ -6,7 +6,8 @@ AuthStream is an open-source dynamic access control framework built using Othent
 
 Exposing the simplest interface as possible for the user, see `contracts/src/Counter.sol` as an example of how to integrate with AuthStream's security infrastructure. It is as simple as implementing this single interface `IWhitelistAvs` and our framework will do the rest. Here is the interface for visibility:
 
-(INSERT IMAGE HERE)
+<img width="926" alt="Screenshot 2024-07-08 at 10 28 02 AM" src="https://github.com/LawsonGraham/access-control-avs/assets/45542987/884e53f5-68a8-4729-b7e4-2c6e8a69273f">
+
 
 ## Demo
 
