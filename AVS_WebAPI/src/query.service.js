@@ -11,7 +11,9 @@ async function getValue(chainID, contractAddress, contractABI, method, params, u
     console.log('params:', params);
     console.log('userAddress:', userAddress);
     try {
-        const provider = new ethers.getDefaultProvider(chainID);
+        // const provider = new ethers.getDefaultProvider(chainID);
+        const provider = new ethers.JsonRpcProvider('https://rpc.sepolia.org');
+
         const contract = new ethers.Contract(contractAddress, contractABI, provider);
         if (params.some(param => param === "<UA>")) {
             params[params.indexOf("<UA>")] = userAddress;
@@ -45,7 +47,7 @@ async function getContractWhitelistMethods() {
         return whitlistObjects;
 
     } catch (err) {
-      console.error(err)
+      // console.error(err)
     }
   }
   

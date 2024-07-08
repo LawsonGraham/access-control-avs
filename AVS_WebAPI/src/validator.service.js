@@ -3,10 +3,8 @@ const dalService = require("./dal.service");
 const queryService = require("./query.service");
 
 async function validate(proofOfTask, data) {
-  console.log('data: ', data);
   try {
       const taskResult = await dalService.getIPfsTask(proofOfTask);
-      console.log(taskResult);
       const whitelistOptions = await queryService.getContractWhitelistMethods();
 
 
@@ -26,7 +24,6 @@ async function validate(proofOfTask, data) {
       if (result === undefined) {
         return false;
       }
-      console.log('Result:', result);
       // we have some chain -> rpc config
 
       // proof of task has:
@@ -41,16 +38,11 @@ async function validate(proofOfTask, data) {
       const assertionType = validationMethod.requirement[0];
       const assertedValue = validationMethod.requirement[1];
 
-      console.log('assertionType:', assertionType);
-      console.log('assertedValue:', assertedValue);
-      console.log('result:', result);
-
       if (assertionType == "LT") {
           if (result >= assertedValue) {
               return false;
           }
       } else if (assertionType == "GT") {
-        console.log("HERE")
           if (result <= assertedValue) {
             console.log("NOT GT")
               return false;
@@ -63,8 +55,6 @@ async function validate(proofOfTask, data) {
           return false;
       }
 
-      console.log('taskResult.userAddress:', taskResult.userAddress);
-      console.log('data:', data);
       // assert that the data field passed on chain is equivalent to the data field used in validation
       if (taskResult.userAddress.toLowerCase() !== data[0].toLowerCase()) {
           return false;
@@ -72,7 +62,7 @@ async function validate(proofOfTask, data) {
 
       return true;
     } catch (err) {
-      console.error(err?.message);
+      // console.error(err?.message);
       return false;
     }
   }

@@ -11,11 +11,10 @@ async function getValue(chainID, contractAddress, contractABI, method, params, u
         }
         // const result = await contract[method](...params);
         const result = await contract.balanceOf(...params);
-        console.log('Function Result:', Number(result));
         return Number(result);
 
     } catch (err) {
-      console.error(err)
+      // console.error(err)
     }
   }
   

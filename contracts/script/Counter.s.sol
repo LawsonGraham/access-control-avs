@@ -75,7 +75,7 @@ contract CounterScript is Script {
 
         counter = Counter(counterAddress);
 
-        address addressToCheck = 0xF69dD439bea9bA48b15AB73Cb504949A5A56Aa9d;
+        address addressToCheck = 0x9bB9B1bcE338D35120E904c7b38a72f1169332Ee;
         
         bool whitelisted = counter.whitelist(addressToCheck);
         console.log("Whitelist retrieved");

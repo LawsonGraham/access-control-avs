@@ -4,8 +4,6 @@ pragma solidity >=0.8.20;
 import {IAvsLogic} from "lib/othentic-contracts/src/NetworkManagement/L2/interfaces/IAvsLogic.sol";
 
 interface IWhitelistAvs is IAvsLogic {
-
-    // returns [[String: chainId, address: contractAddress, String: method, Array: params, Arry: requirement]]
     struct WhitelistMethod {
         string chainId;
         address contractAddress;

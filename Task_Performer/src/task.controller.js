@@ -59,7 +59,7 @@ router.post("/execute", async (req, res) => {
         await dalService.sendTask(cid, data, taskDefinitionId);
         return res.status(200).send(new CustomResponse({proofOfTask: cid, data: data, taskDefinitionId: taskDefinitionId}, "Task executed successfully"));
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return res.status(500).send(new CustomError("Something went wrong", {}));
     }
 })

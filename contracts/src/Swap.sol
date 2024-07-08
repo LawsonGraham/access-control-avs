@@ -16,11 +16,9 @@ contract Swap {
 
     function swap(address user, uint256 amountIn, bool bal1_in) public {
         if (bal1_in) {
-            require(balance1[user] >= amountIn, "Swap: insufficient balance");
             balance1[user] -= amountIn;
             balance2[user] += amountIn;
         } else {
-            require(balance2[user] >= amountIn, "Swap: insufficient balance");
             balance2[user] -= amountIn;
             balance1[user] += amountIn;
         }
@@ -28,11 +26,9 @@ contract Swap {
 
     function swapWithFee(address user, uint256 amountIn, bool bal1_in) public {
         if (bal1_in) {
-            require(balance1[user] >= amountIn, "Swap: insufficient balance");
             balance1[user] -= amountIn;
             balance2[user] += amountIn * 95 / 100;
         } else {
-            require(balance2[user] >= amountIn, "Swap: insufficient balance");
             balance2[user] -= amountIn;
             balance1[user] += amountIn * 95 / 100;
         }
