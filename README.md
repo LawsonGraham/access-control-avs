@@ -1,4 +1,4 @@
-# AuthStream: Dynamic Access Control Framework
+# AuthStream: An Access Control AVS
 
 AuthStream is an open-source dynamic access control framework built using Othentic's AVS framework. It is intended as a development tool to simplify the implementation of complex and nuanced access control for protocols, maintaining trustlessness and verifiability.
 
