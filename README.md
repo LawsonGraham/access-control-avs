@@ -13,7 +13,13 @@ Exposing the simplest interface as possible for the user, see `contracts/src/Cou
 
 Here is a simple demo for a protocol like PermiSwap, a permissioned swap protocol which only lets whitelisted users swap with the coveted ToTheMoonCoin. Users can get whitelisted via having a sufficient balance of another token on sepolia in this example. For those not whitelisted, they are gated from this swap and stuck only trading Rug Coin.
 
-(INSERT DEMO HERE)
+[Link to Demo video](https://www.youtube.com/watch?v=KSnO80Ux43Q)
+
+
+
+https://github.com/LawsonGraham/access-control-avs/assets/45542987/378dd486-ee5c-4786-a142-5eaf972f0471
+
+
 
 ## Instructions for Setup
 
