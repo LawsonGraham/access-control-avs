@@ -1,0 +1,23 @@
+[
+    {
+        "ticker": "USDC",
+        "img": "https://cdn.moralis.io/eth/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+        "name": "USD Coin",
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "decimals": 6
+    },
+    {
+        "ticker": "RugCoin",
+        "img": "https://beconnected.esafety.gov.au/pluginfile.php/84594/mod_resource/content/3/T36_C5_crypto_scams/images/t36_c5_a1_p4.png",
+        "name": "DogWifRug Coin",
+        "address": "0x514910771af9ca656af840dff83e8264ecf986ca",
+        "decimals": 18
+    },
+    {
+        "ticker": "ToTheMoonCoin",
+        "img": "https://cdn.moralis.io/eth/0x514910771af9ca656af840dff83e8264ecf986ca.png",
+        "name": "[WHITE LISTED] Moon Coin",
+        "address": "0x514910771af9ca656af840dff83e8264ecf986ca",
+        "decimals": 18
+    }
+]
